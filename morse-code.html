@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width-device-width, initial-scale= 1">
+    <title>Morse Code</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet"> 
+<style>
+
+  .morse-code {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+  }
+</style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      let code = {
+        a: ".-",
+        b: "-...",
+        c: "-.-.",
+        d: "-..",
+        e: ".",
+        f: "..-.",
+        g: "--.",
+        h: "....",
+        i: "..",
+        j: ".---",
+        k: "-.-",
+        l: ".-..",
+        m: "--",
+        n: "-.",
+        o: "---",
+        p: ".--.",
+        q: "--.-",
+        r: ".-.",
+        s: "...",
+        t: "-",
+        u: "..-",
+        v: "...-",
+        w: ".--",
+        x: "-..-",
+        y: "-.--",
+        z: "--..",
+        " ": "&nbsp;&nbsp;",
+        ".": ".-.-.-",
+        ",": "--..--",
+        "?": "..--.."
+      }
+
+      function translate(char){
+          if(char === "."){
+            return "&middot;"
+          }else{
+            return char;
+        }
+      }
+
+      const message = document.createElement('input');
+      message.setAttribute('type', 'text');
+      message.setAttribute('value', '');
+      const container = document.getElementById('container');
+      const morseCode = document.createElement('div');
+      morseCode.classList.add('morse-code');  
+      
+      message.addEventListener('input', function() {
+        let phrase = "";
+        let translatedPhrase = "";
+        let msg = message.value.toLowerCase();
+        for(let char of msg){
+          phrase += code[char] +  " ";
+        }
+        for(let char of phrase){
+          translatedPhrase += translate(char);
+        }
+        morseCode.innerHTML = translatedPhrase;
+      });
+
+      container.appendChild(message);
+      message.focus();
+      container.appendChild(morseCode);
+      
+    </script>
+  </body>
+<html>
